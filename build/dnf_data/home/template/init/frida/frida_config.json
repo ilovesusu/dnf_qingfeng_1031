@@ -1,0 +1,211 @@
+{
+    "common": {
+        "gmCid": [
+            1
+        ],
+        "vipCid": [
+            1
+        ]
+    },
+    "base": {
+        "modules": [
+            {
+                "name": "system",
+                "path": "/plugins/frida/lib/core/core-system-manager.js",
+                "enabled": true,
+                "freeze": true
+            },
+            {
+                "name": "mysql",
+                "path": "/plugins/frida/lib/core/core-mysql-database.js",
+                "enabled": true
+            },
+            {
+                "name": "utils",
+                "path": "/plugins/frida/lib/game-utils.js",
+                "enabled": true
+            },
+            {
+                "name": "utils.cuser",
+                "path": "/plugins/frida/lib/base-cuser.js",
+                "enabled": true
+            },
+            {
+                "name": "utils.cuserCharacInfo",
+                "path": "/plugins/frida/lib/base-cuser-charac-info.js",
+                "enabled": true
+            },
+            {
+                "name": "utils.gameWorld",
+                "path": "/plugins/frida/lib/base-game-world.js",
+                "enabled": true
+            },
+            {
+                "name": "utils.cuserEx",
+                "path": "/plugins/frida/lib/extend-cuser.js",
+                "enabled": true
+            },
+            {
+                "name": "utils.gameWorldEx",
+                "path": "/plugins/frida/lib/extend-game-world.js",
+                "enabled": true
+            }
+        ]
+    },
+    "modules": [
+        {
+            "name": "GM指令",
+            "path": "/plugins/frida/module/gm-command.js",
+            "enabled": true
+        },
+        {
+            "name": "join-guild",
+            "path": "/plugins/frida/module/auto-join-guild.js",
+            "enabled": true,
+            "freeze": true
+        },
+        {
+            "name": "rank",
+            "path": "/plugins/frida/module/rank-notice.js",
+            "enabled": true
+        },
+        {
+            "name": "abyss-mode",
+            "path": "/plugins/frida/module/abyss-mode.js",
+            "enabled": true
+        },
+        {
+            "name": "linas",
+            "path": "/plugins/frida/module/linas-gift.js",
+            "enabled": true,
+            "freeze": true
+        },
+        {
+            "name": "useitem",
+            "path": "/plugins/frida/module/item-handle.js",
+            "enabled": true
+        },
+        {
+            "name": "继承",
+            "path": "/plugins/frida/module/equ-inherit.js",
+            "enabled": true
+        },
+        {
+            "name": "跨界",
+            "path": "/plugins/frida/module/equ-transfer.js",
+            "enabled": true
+        },
+        {
+            "name": "inlay",
+            "path": "/plugins/frida/module/equ-inlay.js",
+            "enabled": true,
+            "freeze": true
+        },
+        {
+            "name": "fourteen",
+            "path": "/plugins/frida/module/fourteen-keys.js",
+            "enabled": true,
+            "freeze": true
+        },
+        {
+            "name": "tarde",
+            "path": "/plugins/frida/module/trade-gold-daily.js",
+            "enabled": false
+        },
+        {
+            "name": "fix-tod",
+            "path": "/plugins/frida/module/fix-tod.js",
+            "enabled": true
+        },
+        {
+            "name": "avatar-hidden",
+            "path": "/plugins/frida/module/avatar-hidden-option.js",
+            "enabled": true
+        },
+        {
+            "name": "return-user",
+            "path": "/plugins/frida/module/return-user.js",
+            "enabled": true
+        },
+        {
+            "name": "rank-statue",
+            "path": "/plugins/frida/module/rank-statue.js",
+            "enabled": true
+        },
+        {
+            "name": "village-attack",
+            "path": "/plugins/frida/module/village-attack.js",
+            "enabled": true
+        },
+        {
+            "name": "red-packet",
+            "path": "/plugins/frida/module/red-packet.js",
+            "enabled": true
+        },
+        {
+            "name": "cdk-redeem",
+            "path": "/plugins/frida/module/cdk-redeem.js",
+            "enabled": true
+        },
+        {
+            "name": "online-reward",
+            "path": "/plugins/frida/module/online-reward.js",
+            "enabled": true
+        },
+        {
+            "name": "lucky-online",
+            "path": "/plugins/frida/module/lucky-online-event.js",
+            "enabled": true
+        },
+        {
+            "name": "scheduled-notice",
+            "path": "/plugins/frida/module/scheduled-notice-mail.js",
+            "enabled": true
+        },
+        {
+            "name": "joyclub-vip",
+            "path": "/plugins/frida/module/joyclub-vip.js",
+            "enabled": true
+        },
+        {
+            "name": "dungeon-enhance",
+            "path": "/plugins/frida/module/dungeon-equip-enhance.js",
+            "enabled": true
+        },
+        {
+            "name": "magic-seal",
+            "path": "/plugins/frida/module/magic-seal-enhance.js",
+            "enabled": true
+        },
+        {
+            "name": "epic-broadcast",
+            "path": "/plugins/frida/module/epic-drop-broadcast.js",
+            "enabled": true
+        },
+        {
+            "name": "epic-potion",
+            "path": "/plugins/frida/module/epic-potion.js",
+            "enabled": true
+        },
+        {
+            "name": "dungeon-clear",
+            "path": "/plugins/frida/module/dungeon-clear-broadcast.js",
+            "enabled": true
+        },
+        {
+            "name": "sp-tp-return",
+            "path": "/plugins/frida/module/sp-tp-return.js",
+            "enabled": true
+        },
+        {
+            "name": "share-seria",
+            "path": "/plugins/frida/module/share-seria-room.js",
+            "enabled": true
+        },
+        {
+            "name": "allow-stall",
+            "path": "/plugins/frida/module/allow-dungeon-stall.js",
+            "enabled": true
+        }
+    ]
+}
