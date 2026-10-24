@@ -65,7 +65,8 @@ COPY build/dnf_data/home/template/init/lib/common.sh \
 
 COPY build/dnf_data/etc/my.cnf /etc/
 
-COPY --chmod=0755 build/dnf_data/db-entrypoint.sh /db-entrypoint.sh
+COPY build/dnf_data/db-entrypoint.sh /db-entrypoint.sh
+RUN chmod 0755 /db-entrypoint.sh
 
 VOLUME /var/lib/mysql
 EXPOSE 4000
