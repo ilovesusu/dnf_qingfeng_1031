@@ -88,6 +88,12 @@ EOF
     fi
 done
 
+# 初始化 frida 插件专用数据库
+echo "prepare init frida db....."
+MYSQL_PWD="$CUR_SG_DB_ROOT_PASSWORD" mysql -h "$CUR_SG_DB_HOST" -P "$CUR_SG_DB_PORT" -u root <<EOF
+CREATE SCHEMA IF NOT EXISTS frida DEFAULT CHARACTER SET utf8;
+EOF
+
 # game用户连接大区数据库需要配置game用户权限[主数据库和大区数据库可能是独立的需要单独配置]
 echo "server group db: flush privileges....."
 MYSQL_PWD="$CUR_SG_DB_ROOT_PASSWORD" mysql -h "$CUR_SG_DB_HOST" -P "$CUR_SG_DB_PORT" -u root <<EOF

@@ -70,9 +70,13 @@ echo dbmwbin >"$dbmw_bin"
 
 # 文件初始化模板
 tinit="$WORK/tinit"
-mkdir -p "$tinit/run" "$tinit/monitor_ip" "$tinit/scheduler"
+tplugins="$WORK/plugins"
+mkdir -p "$tinit/run" "$tinit/monitor_ip" "$tinit/scheduler" "$tinit/frida/lib" "$tinit/frida/module"
 echo libhook >"$tinit/libhook.so"
-echo fridajs >"$tinit/frida.js"
+echo fridajs >"$tinit/frida/frida.js"
+echo fridacfg >"$tinit/frida/frida_config.json"
+echo fridalib >"$tinit/frida/lib/game-utils.js"
+echo fridamod >"$tinit/frida/module/gm-command.js"
 echo getip >"$tinit/monitor_ip/get_public_ip.sh"
 echo startgate >"$tinit/run/start_gate.sh"
 echo userscript >"$tinit/scheduler/user-script.sh"
@@ -86,6 +90,7 @@ run_hook() {
         DATA_PATH="$data_path" \
         TEMPLATE_INIT_PATH="$tinit" \
         DBMW_BIN_FILE="$dbmw_bin" \
+        PLUGINS_PATH="$tplugins" \
         DNF_DB_GAME_PASSWORD=gamepwd \
         DEC_GAME_PWD=decpwd \
         SERVER_GROUP_NAME=siroco \
@@ -155,7 +160,12 @@ chk "df_dbmw_r 可读" "dbmwbin" "$(cat "$dest_path/dbmw_guild/df_dbmw_r")"
 chk "生成 privatekey.pem" yes "$(exists "$data_path/privatekey.pem")"
 chk "默认保留用户自定义的 publickey.pem" "pubkey" "$(cat "$data_path/publickey.pem")"
 chk "复制 libhook.so 到 dp" yes "$(exists "$data_path/dp/libhook.so")"
-chk "更新 frida.js" "fridajs" "$(cat "$data_path/frida.js" 2>/dev/null)"
+chk "更新 frida/frida.js" "fridajs" "$(cat "$data_path/frida/frida.js" 2>/dev/null)"
+chk "更新 frida/frida_config.json" "fridacfg" "$(cat "$data_path/frida/frida_config.json" 2>/dev/null)"
+chk "更新 frida/lib/game-utils.js" "fridalib" "$(cat "$data_path/frida/lib/game-utils.js" 2>/dev/null)"
+chk "更新 frida/module/gm-command.js" "fridamod" "$(cat "$data_path/frida/module/gm-command.js" 2>/dev/null)"
+chk "创建 frida/log 目录" yes "$([ -d "$data_path/frida/log" ] && echo yes || echo no)"
+chk "/plugins/frida 软链接指向 /data/frida" "$data_path/frida" "$(readlink "$tplugins/frida" 2>/dev/null)"
 chk "复制 get_public_ip.sh" yes "$(exists "$data_path/monitor_ip/get_public_ip.sh")"
 chk "更新 run/start_gate.sh" "startgate" "$(cat "$data_path/run/start_gate.sh" 2>/dev/null)"
 chk "更新 scheduler/user-script.sh" "userscript" "$(cat "$data_path/scheduler/user-script.sh" 2>/dev/null)"

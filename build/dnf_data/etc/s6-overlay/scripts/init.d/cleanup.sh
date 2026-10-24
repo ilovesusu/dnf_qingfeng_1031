@@ -6,7 +6,7 @@
 source "${DNF_LIB_PATH:-/home/template/init/lib}/common.sh"
 
 # 检查 持久化目录是否指向真实目录
-for d in /data/s6-rc.d /data/dp \
+for d in /data/s6-rc.d /data/dp /data/frida /data/frida/log \
     /data/log /data/log/netbird /data/log/tailscale \
     /data/monitor_ip /data/scheduler \
     /data/netbird /data/tailscale \
@@ -21,7 +21,7 @@ rm -rf /var/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock.lock \
 
 [ -L /data/log ] || rm -rf /data/log/*
 
-if ! mkdir -p /data/s6-rc.d /data/dp \
+if ! mkdir -p /data/s6-rc.d /data/dp /data/frida/log /plugins \
     /data/log/netbird /data/log/tailscale \
     /data/monitor_ip /data/scheduler \
     /data/netbird /data/tailscale \
@@ -31,4 +31,5 @@ if ! mkdir -p /data/s6-rc.d /data/dp \
 fi
 
 ln -sf /data/dp /dp2
+ln -sfn /data/frida /plugins/frida
 ln -sf /home/template/init/scheduler/db-tool.sh /usr/bin/db-tool

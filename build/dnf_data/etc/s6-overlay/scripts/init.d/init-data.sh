@@ -6,6 +6,7 @@ neople_path="${NEOPLE_PATH:-/home/neople}"
 data_path="${DATA_PATH:-/data}"
 template_init_path="${TEMPLATE_INIT_PATH:-/home/template/init}"
 dbmw_bin_file="${DBMW_BIN_FILE:-/home/template/init/df_dbmw_r}"
+plugins_path="${PLUGINS_PATH:-/plugins}"
 
 source "${DNF_LIB_PATH:-/home/template/init/lib}/common.sh"
 
@@ -45,11 +46,27 @@ else
     echo "libhook.so have already inited, do nothing!"
 fi
 
-# 更新时自动备份升级 frida.js
+# 更新时自动备份升级模块化 frida (dof-frida)
+frida_data_path="$data_path/frida"
 frida_ref_path="$data_path/.frida-template"
+normalize_data_path "$frida_data_path" directory
 normalize_data_path "$frida_ref_path" directory
-mkdir -p "$frida_ref_path"
-sync_template_file "$template_init_path/frida.js" "$data_path/frida.js" "$frida_ref_path/frida.js"
+mkdir -p "$frida_data_path/log" "$frida_ref_path"
+if [ -d "$template_init_path/frida" ]; then
+    while IFS= read -r -d '' fd; do
+        [ "$fd" = "$template_init_path/frida" ] && continue
+        frel="${fd#"$template_init_path/frida"/}"
+        mkdir -p "$frida_data_path/$frel" "$frida_ref_path/$frel"
+    done < <(find "$template_init_path/frida" -type d -print0)
+    while IFS= read -r -d '' fp; do
+        frel="${fp#"$template_init_path/frida"/}"
+        sync_template_file "$fp" "$frida_data_path/$frel" "$frida_ref_path/$frel"
+    done < <(find "$template_init_path/frida" -type f -print0)
+fi
+[ -L "$frida_data_path" ] || chmod -R 755 "$frida_data_path"
+[ -L "$frida_data_path/log" ] || chmod 777 "$frida_data_path/log"
+mkdir -p "$plugins_path"
+[ "$(readlink "$plugins_path/frida" 2>/dev/null)" = "$frida_data_path" ] || ln -sfn "$frida_data_path" "$plugins_path/frida"
 
 # 初始化 monitor_ip 的 get_public_ip.sh 脚本
 normalize_data_path "$data_path/monitor_ip" directory
